@@ -45,11 +45,18 @@ int main(void) {
         return -1;
     };
 
+    //-- Read the video stream
+    capture.open(-1);
+    if(!capture.isOpened()) {
+        printf("--(!)Error opening video capture\n");
+        return -1;
+    }
+
     //-- Run the detection and control loop
     while(!pause) {
         capture.read(frame);
         if(frame.empty()) {
-            printf("--(!) No captured frame -- Break!");
+            printf("--(!) No captured frame -- Break!\n");
             break;
         }
 
@@ -120,5 +127,5 @@ void detectAndDisplay(Mat frame) {
             }
         }
     }
-    imshow(window_name, faceROI);
+    imshow(window_name, mask);
 }
